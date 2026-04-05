@@ -1920,7 +1920,6 @@ do
             Min = Info.Min;
             Max = Info.Max;
             Rounding = Info.Rounding;
-            MaxSize = 232;
             Type = 'Slider';
             Callback = Info.Callback or function(Value) end;
         };
@@ -2026,10 +2025,10 @@ do
                 DisplayLabel.Text = string.format('%s/%s', Slider.Value .. Suffix, Slider.Max .. Suffix);
             end
 
-            local X = math.ceil(Library:MapValue(Slider.Value, Slider.Min, Slider.Max, 0, Slider.MaxSize));
-            Fill.Size = UDim2.new(0, X, 1, 0);
+            local X = (Slider.Value - Slider.Min) / (Slider.Max - Slider.Min);
+            Fill.Size = UDim2.new(X, 0, 1, 0);
 
-            HideBorderRight.Visible = not (X == Slider.MaxSize or X == 0);
+            HideBorderRight.Visible = not (X == 1 or X == 0);
         end;
 
         function Slider:OnChanged(Func)
@@ -2068,15 +2067,10 @@ do
 
         SliderInner.InputBegan:Connect(function(Input)
             if Input.UserInputType == Enum.UserInputType.MouseButton1 and not Library:MouseIsOverOpenedFrame() then
-                local mPos = Mouse.X;
-                local gPos = Fill.Size.X.Offset;
-                local Diff = mPos - (Fill.AbsolutePosition.X + gPos);
-
                 while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                    local nMPos = Mouse.X;
-                    local nX = math.clamp(gPos + (nMPos - mPos) + Diff, 0, Slider.MaxSize);
-
-                    local nValue = Slider:GetValueFromXOffset(nX);
+                    local nAlpha = math.clamp((Mouse.X - SliderInner.AbsolutePosition.X) / SliderInner.AbsoluteSize.X, 0, 1)
+                    local nValue = Round(Slider.Min + (Slider.Max - Slider.Min) * nAlpha)
+                    
                     local OldValue = Slider.Value;
                     Slider.Value = nValue;
 
