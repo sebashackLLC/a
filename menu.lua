@@ -825,7 +825,9 @@ do
 
         function ColorPicker:OnChanged(Func)
             ColorPicker.Changed = Func;
-            Func(ColorPicker.Value)
+            if Func then
+                Func(ColorPicker.Value)
+            end
         end;
 
         function ColorPicker:Show()
@@ -1170,7 +1172,9 @@ do
 
         function KeyPicker:OnChanged(Callback)
             KeyPicker.Changed = Callback
-            Callback(KeyPicker.Value)
+            if Callback then
+                Callback(KeyPicker.Value)
+            end
         end
 
         if ParentObj.Addons then
@@ -1760,7 +1764,9 @@ do
 
         function Textbox:OnChanged(Func)
             Textbox.Changed = Func;
-            Func(Textbox.Value);
+            if Func then
+                Func(Textbox.Value);
+            end
         end;
 
         Groupbox:AddBlank(5);
@@ -1859,7 +1865,9 @@ do
 
         function Toggle:OnChanged(Func)
             Toggle.Changed = Func;
-            Func(Toggle.Value);
+            if Func then
+                Func(Toggle.Value);
+            end
         end;
 
         function Toggle:SetValue(Bool)
@@ -2033,7 +2041,9 @@ do
 
         function Slider:OnChanged(Func)
             Slider.Changed = Func;
-            Func(Slider.Value);
+            if Func then
+                Func(Slider.Value);
+            end
         end;
 
         local function Round(Value)
@@ -2430,7 +2440,9 @@ do
 
         function Dropdown:OnChanged(Func)
             Dropdown.Changed = Func;
-            Func(Dropdown.Value);
+            if Func then
+                Func(Dropdown.Value);
+            end
         end;
 
         function Dropdown:SetValue(Val)
