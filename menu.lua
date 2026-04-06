@@ -73,5 +73,34 @@ local aimbotTab = window.createTab("Aimbot", "crosshair")
 local visualsTab = window.createTab("Visuals", "eye")
 local exploitsTab = window.createTab("Exploits", "zap")
 local miscTab = window.createTab("Misc", "settings")
+local systemTab = window.createTab("System", "layers")
+
+-- [ System Tab Setup ] --
+local guiSection = systemTab.createSection("GUI Configuration")
+
+guiSection.createColorpicker("Accent Color", Color3.fromRGB(255, 100, 100), false, "gui_accent_color", function(val)
+    lib.setAccent(val)
+end)
+
+guiSection.createButton("Reset Accent", function()
+    lib.setAccent(Color3.fromRGB(255, 100, 100))
+end)
+
+guiSection.createButton("Set Title: Sahur Tactical", function()
+    lib.setTitle("Sahur Tactical")
+end)
+
+guiSection.createButton("Set Title: Lithium", function()
+    lib.setTitle("Lithium")
+end)
+
+guiSection.createButton("Unload GUI", function()
+    local coreGui = game:GetService("CoreGui")
+    for _, gui in pairs(coreGui:GetChildren()) do
+        if gui:IsA("ScreenGui") and gui:FindFirstChild("uiBorder1") then
+            gui:Destroy()
+        end
+    end
+end)
 
 print("")
