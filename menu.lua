@@ -86,14 +86,6 @@ guiSection.createButton("Reset Accent", function()
     lib.setAccent(Color3.fromRGB(255, 100, 100))
 end)
 
-guiSection.createButton("Set Title: Sahur Tactical", function()
-    lib.setTitle("Sahur Tactical")
-end)
-
-guiSection.createButton("Set Title: Lithium", function()
-    lib.setTitle("Lithium")
-end)
-
 guiSection.createButton("Unload GUI", function()
     local coreGui = game:GetService("CoreGui")
     for _, gui in pairs(coreGui:GetChildren()) do
